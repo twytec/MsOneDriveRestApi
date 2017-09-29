@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.26730.16
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MsOneDriveRestApi", "MsOneDriveRestApi\MsOneDriveRestApi.csproj", "{B517F7C6-CCDD-428A-A03A-A3075826641C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B517F7C6-CCDD-428A-A03A-A3075826641C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B517F7C6-CCDD-428A-A03A-A3075826641C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B517F7C6-CCDD-428A-A03A-A3075826641C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B517F7C6-CCDD-428A-A03A-A3075826641C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C6440CE4-EB66-4BA5-BEF3-5E9A256ACDDD}
+	EndGlobalSection
+EndGlobal
