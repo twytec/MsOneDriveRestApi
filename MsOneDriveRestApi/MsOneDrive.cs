@@ -15,7 +15,7 @@ namespace MsOneDriveRestApi
 
         public static async Task<bool> IsAppRootExist()
         {
-            if (await GetStringFromApiAsync(appRoot) != null)
+            if (await GetFromApiAsync(appRoot) != null)
             {
                 return true;
             }
@@ -47,13 +47,19 @@ namespace MsOneDriveRestApi
 
             try
             {
-                var json = await GetStringFromApiAsync(endpoint);
-                return OneDriveItem.FromJson(json) as OneDriveFile;
+                var response = await GetFromApiAsync(endpoint);
+                if (response != null)
+                {
+                    var json = await response.Content.ReadAsStringAsync();
+                    return OneDriveItem.FromJson(json) as OneDriveFile;
+                }
             }
             catch (Exception)
             {
                 throw;
             }
+
+            return null;
         }
 
         #endregion
@@ -87,6 +93,32 @@ namespace MsOneDriveRestApi
             {
                 stream.Dispose();
             }
+        }
+
+        #endregion
+
+        #region Download
+
+        public static async Task<Stream> DownloadFileAsync(string fileId)
+        {
+            Stream fileStream = null;
+
+            try
+            {
+                string endpoint = $"items/{fileId}/content";
+                var response = await GetFromApiAsync(endpoint);
+                if (response != null)
+                {
+                    fileStream = await response.Content.ReadAsStreamAsync();
+                    return fileStream;
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+            return null;
         }
 
         #endregion
@@ -125,13 +157,19 @@ namespace MsOneDriveRestApi
 
             try
             {
-                var json = await GetStringFromApiAsync(endpoint);
-                return OneDriveItem.FromJson(json) as OneDriveFolder;
+                var response = await GetFromApiAsync(endpoint);
+                if (response != null)
+                {
+                    var json = await response.Content.ReadAsStringAsync();
+                    return OneDriveItem.FromJson(json) as OneDriveFolder;
+                }
             }
             catch (Exception)
             {
                 throw;
             }
+
+            return null;
         }
 
         #endregion
@@ -296,7 +334,7 @@ namespace MsOneDriveRestApi
             return null;
         }
 
-        static async Task<string> GetStringFromApiAsync(string endpoint)
+        static async Task<HttpResponseMessage> GetFromApiAsync(string endpoint)
         {
             try
             {
@@ -310,13 +348,13 @@ namespace MsOneDriveRestApi
 
                     if (response.IsSuccessStatusCode)
                     {
-                        return await response.Content.ReadAsStringAsync();
+                        return response;
                     }
                 }
             }
             catch (Exception)
             {
-
+                throw;
             }
 
             return null;
